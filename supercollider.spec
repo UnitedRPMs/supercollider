@@ -97,6 +97,12 @@ SuperCollider support for the Vim text editor.
 %setup -T -D -n %{name}-%{shortcommit0} 
 
 %build
+
+find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
+
+# https://fedoraproject.org/wiki/Changes/Avoid_usr_bin_python_in_RPM_Build#Quick_Opt-Out
+export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
+
 %cmake  -DSSE=ON \
 	-DSSE2=ON \
         -DSUPERNOVA=ON \
