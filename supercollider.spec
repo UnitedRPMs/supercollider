@@ -98,8 +98,6 @@ SuperCollider support for the Vim text editor.
 
 %build
 
-find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
-
 # https://fedoraproject.org/wiki/Changes/Avoid_usr_bin_python_in_RPM_Build#Quick_Opt-Out
 export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
 
@@ -111,6 +109,9 @@ export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
 %make_build V=0
 
 %install
+
+export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
+
 %make_install V=0
 
 # Remove rpath.
@@ -119,6 +120,8 @@ chrpath --delete $RPM_BUILD_ROOT/%{_bindir}/sclang
 
 # Remove Zero length files
 find %{buildroot} -size 0 -delete
+
+find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 
 %post -p /sbin/ldconfig
 
