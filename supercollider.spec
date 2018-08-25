@@ -35,6 +35,9 @@ BuildRequires: qt5-qtsensors-devel
 BuildRequires: qt5-qttools-devel
 BuildRequires: qt5-qtlocation-devel 
 BuildRequires: qt5-qtwebkit-devel
+BuildRequires: qt5-qtwebengine-devel
+BuildRequires: pkgconfig(Qt5Svg)
+BuildRequires: pkgconfig(Qt5WebSockets)
 BuildRequires: yaml-cpp03-devel 
 BuildRequires: cwiid-devel
 BuildRequires: chkconfig
@@ -43,7 +46,7 @@ BuildRequires: libatomic
 BuildRequires: boost-devel 
 BuildRequires: yaml-cpp-devel 
 BuildRequires: git
-BuildRequires:  chrpath
+BuildRequires: chrpath
 
 Requires: emacs 
 Requires: w3m-el
