@@ -1,10 +1,10 @@
-%global commit0 abe24916e35e83b1d9d1cda39bf068a534434da9
+%global commit0 a3b8ac73001f315ad01b29b81a97fbf7d03b709f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name: supercollider
-Version: 3.9.3
+Version: 3.10.0
 Release: 1%{?gver}%{?dist}
 License: GPLv3
 Group: Applications/Multimedia
@@ -182,7 +182,10 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 
 %changelog
 
-* Thu May 17 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.9.3.gitabe2491-1  
+* Sat Dec 01 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.10.0-1.gita3b8ac7  
+- Updated to 3.10.0-1.gita3b8ac7 
+
+* Thu May 17 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.9.3-1.gitabe2491  
 - Upstream 
 - Cleaned and Updated to 3.9.3
 
