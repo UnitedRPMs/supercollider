@@ -38,7 +38,7 @@ BuildRequires: qt5-qtwebkit-devel
 BuildRequires: qt5-qtwebengine-devel
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5WebSockets)
-BuildRequires: yaml-cpp03-devel 
+BuildRequires: yaml-cpp-devel   
 BuildRequires: cwiid-devel
 BuildRequires: chkconfig
 BuildRequires: systemd-devel
