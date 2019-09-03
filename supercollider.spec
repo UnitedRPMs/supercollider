@@ -5,12 +5,14 @@
 Summary: Object oriented programming environment for real-time audio and video processing
 Name: supercollider
 Version: 3.10.3
-Release: 1%{?gver}%{?dist}
+Release: 1%{?dist}
 License: GPLv3
 Group: Applications/Multimedia
 URL: https://supercollider.github.io
-Source0: https://github.com/supercollider/supercollider/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+#Source0: https://github.com/supercollider/supercollider/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source-linux.tar.bz2
 Source1: supercollider-snapshot
+Patch: supercollider-use_system_boost.patch
 
 BuildRequires: cmake 
 BuildRequires: gcc-c++ 
@@ -95,19 +97,15 @@ Recommends: scvim
 %description vim
 SuperCollider support for the Vim text editor.
 
-%prep
-%{S:1} -c %{commit0}
-%setup -T -D -n %{name}-%{shortcommit0} 
+%prep 
+%autosetup -n SuperCollider-Source -p1
 
 %build
 
 # https://fedoraproject.org/wiki/Changes/Avoid_usr_bin_python_in_RPM_Build#Quick_Opt-Out
 export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
 
-%cmake  -DSSE=ON \
-	-DSSE2=ON \
-        -DSUPERNOVA=ON \
-        -DSYSTEM_BOOST=ON .
+%cmake  -DSYSTEM_BOOST=ON   .
 
 %make_build V=0
 
@@ -182,8 +180,8 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 
 %changelog
 
-* Tue Sep 03 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.10.3-1.git67a1eb1
-- Updated to 3.10.3-1.git67a1eb1
+* Tue Sep 03 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.10.3-1
+- Updated to 3.10.3-1
 
 * Sun Feb 17 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.10.2-1.git834c036
 - Updated to 3.10.2-1.git834c036
