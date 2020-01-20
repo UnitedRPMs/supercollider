@@ -4,7 +4,7 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name: supercollider
-Version: 3.10.3
+Version: 3.10.4
 Release: 1%{?dist}
 License: GPLv3
 Group: Applications/Multimedia
@@ -12,7 +12,7 @@ URL: https://supercollider.github.io
 #Source0: https://github.com/supercollider/supercollider/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source-linux.tar.bz2
 Source1: supercollider-snapshot
-Patch: supercollider-use_system_boost.patch
+#Patch: supercollider-use_system_boost.patch
 
 BuildRequires: cmake 
 BuildRequires: gcc-c++ 
@@ -179,6 +179,9 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+
+* Sun Jan 19 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.10.4-1
+- Updated to 3.10.4-1
 
 * Tue Sep 03 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.10.3-1
 - Updated to 3.10.3-1
