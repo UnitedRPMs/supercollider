@@ -2,6 +2,9 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
+%define _legacy_common_support 1
+
+
 Summary: Object oriented programming environment for real-time audio and video processing
 Name: supercollider
 Version: 3.11.0
@@ -9,10 +12,9 @@ Release: 1%{?dist}
 License: GPLv3
 Group: Applications/Multimedia
 URL: https://supercollider.github.io
-#Source0: https://github.com/supercollider/supercollider/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source-linux.tar.bz2
+Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source.tar.bz2
 Source1: supercollider-snapshot
-#Patch: supercollider-use_system_boost.patch
+Patch: supercollider-3.11.0-use_system_link.patch
 
 BuildRequires: cmake 
 BuildRequires: gcc-c++ 
@@ -98,20 +100,22 @@ Recommends: scvim
 SuperCollider support for the Vim text editor.
 
 %prep 
-%autosetup -n SuperCollider-Source -p1
+%autosetup -n SuperCollider-%{version}-Source -p1
+
+  # removing macOS hidden files (due to release tarball issues):
+  # https://github.com/supercollider/supercollider/issues/4545
+  find . -type f -iname "*\._*" -delete
 
 %build
 
-# https://fedoraproject.org/wiki/Changes/Avoid_usr_bin_python_in_RPM_Build#Quick_Opt-Out
-export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
 
-%cmake  -DSYSTEM_BOOST=ON   .
+%cmake  -DCMAKE_BUILD_TYPE=Release  .
+
+#        -DSC_VIM=OFF
 
 %make_build V=0
 
 %install
-
-export PYTHON_DISALLOW_AMBIGUOUS_VERSION=0
 
 %make_install V=0
 
