@@ -7,7 +7,7 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name: supercollider
-Version: 3.11.0
+Version: 3.11.1
 Release: 1%{?dist}
 License: GPLv3
 Group: Applications/Multimedia
@@ -183,6 +183,9 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+
+* Thu Sep 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.11.1-1
+- Updated to 3.11.1
 
 * Sun Mar 15 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.11.0-1
 - Updated to 3.11.0
