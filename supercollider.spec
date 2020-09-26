@@ -108,8 +108,7 @@ SuperCollider support for the Vim text editor.
 
 %build
 
-
-%cmake  -DCMAKE_BUILD_TYPE=Release  .
+%cmake -DCMAKE_BUILD_TYPE=Release  .
 
 #        -DSC_VIM=OFF
 
