@@ -113,10 +113,11 @@ SuperCollider support for the Vim text editor.
 
 #        -DSC_VIM=OFF
 
+pushd %{_target_platform}
 %make_build V=0
 
 %install
-
+pushd %{_target_platform}
 %make_install V=0
 
 # Remove rpath.
