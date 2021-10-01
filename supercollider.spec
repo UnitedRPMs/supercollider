@@ -7,14 +7,14 @@
 
 Summary: Object oriented programming environment for real-time audio and video processing
 Name: supercollider
-Version: 3.11.2
+Version: 3.12.1
 Release: 1%{?dist}
 License: GPLv3
 Group: Applications/Multimedia
 URL: https://supercollider.github.io
 Source0: https://github.com/supercollider/supercollider/releases/download/Version-%{version}/SuperCollider-%{version}-Source.tar.bz2
 Source1: supercollider-snapshot
-Patch: supercollider-3.11.0-use_system_link.patch
+#Patch: supercollider-3.11.0-use_system_link.patch
 
 BuildRequires: cmake 
 BuildRequires: gcc-c++ 
@@ -107,17 +107,15 @@ SuperCollider support for the Vim text editor.
   find . -type f -iname "*\._*" -delete
 
 %build
-
-%cmake -DCMAKE_BUILD_TYPE=Release  .
+mkdir -p build
+%cmake -B build -DCMAKE_BUILD_TYPE=Release  
 
 #        -DSC_VIM=OFF
 
-pushd %{_target_platform}
-%make_build V=0
+%make_build -C build V=0
 
 %install
-pushd %{_target_platform}
-%make_install V=0
+%make_install -C build V=0
 
 # Remove rpath.
 chrpath --delete $RPM_BUILD_ROOT/%{_bindir}/scide
@@ -146,7 +144,6 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 %{_datadir}/SuperCollider/SCClassLibrary
 %{_datadir}/SuperCollider/sounds
 %{_datadir}/SuperCollider/translations
-%{_datadir}/pixmaps/supercollider*
 # scsynth
 %{_bindir}/scsynth
 %{_libdir}/SuperCollider/plugins
@@ -161,7 +158,9 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 # ide
 %{_bindir}/scide
 %{_datadir}/applications/SuperColliderIDE.desktop
-%{_datadir}/pixmaps/sc_ide.svg
+%{_datadir}/icons/hicolor/*/apps/supercollider.xpm
+ %{_datadir}/icons/hicolor/*/apps/supercollider.png
+%{_datadir}/icons/hicolor/scalable/apps/sc_ide.svg
 
 %files devel
 %defattr(-,root,root,-)
@@ -183,6 +182,9 @@ find . -name '*.py' -exec sed -i -r 's|/usr/bin/python$|&2|g' {} +
 %{_datadir}/mime/packages/supercollider.xml
 
 %changelog
+
+* Thu Sep 16 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.12.1-1
+- Updated to 3.12.1
 
 * Thu Jun 03 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.11.2-1
 - Updated to 3.11.2
